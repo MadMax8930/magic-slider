@@ -1,16 +1,16 @@
 const track = document.getElementById("image-track");
 
-window.onmousedown = event => {
+const handleOnDown = event => {
     track.dataset.mouseDownAt = event.clientX;
 }
 
-window.onmouseup = () => {
+const handleOnUp = () => {
     track.dataset.mouseDownAt = "0";
 
     track.dataset.prevPercentage = track.dataset.percentage;
 }
 
-window.onmousemove = event => {
+const handleOnMove = event => {
 
     if(track.dataset.mouseDownAt === "0") return;
 
@@ -34,4 +34,45 @@ window.onmousemove = event => {
             objectPosition: `${nextPercentage + 100}% center`
         }, { duration: 1200, fill: "forwards" });
     }
+}
+
+// Touch events
+
+window.onmousedown = event => handleOnDown(event);
+
+window.ontouchstart = event => handleOnDown(event.touches[0]);
+
+window.onmouseup = event => handleOnUp(event);
+
+window.ontouchend = event => handleOnUp(event.touches[0]);
+
+window.onmousemove = event => handleOnMove(event);
+
+window.ontouchmove = event => handleOnMove(event.touches[0]);
+
+// Title effect
+
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-';
+
+document.querySelector("h1").onmouseover = event => {
+   let iterations = 0
+
+   const interval = setInterval(() => {
+    event.target.innerText = event.target.innerText.split("")
+    .map((letter, index) => {
+        if (index < iterations) {
+            return event.target.dataset.value[index]
+        }
+        return letters[Math.floor(Math.random() * 26)]    
+    })
+    .join("");
+
+    if(iterations >= event.target.dataset.value.length) {
+        clearInterval(interval)
+    };
+
+    iterations += 1 / 4
+    
+}, 30)
+
 }

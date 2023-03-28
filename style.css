@@ -1,7 +1,7 @@
 body {
     height: 100vh;
     width: 100vw;
-    background-color: rgba(18, 16, 16, 0.841);
+    background-color: rgba(8, 7, 7, 0.904);
     margin: 0rem;
     overflow: hidden;
 }
@@ -20,4 +20,12 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(0%,-50%);
+}
+
+h1 {
+    color: white;
+    font-size: 2.75rem;
+    font-family: "Space Mono", monospace;
+    display: grid;
+    place-items: center;
 }
